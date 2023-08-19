@@ -1,0 +1,56 @@
+<div class="todo">
+  <div class="top">
+    <span class="priority" [ngClass]="getPriorityClass()"></span>
+    <span class="name" [ngClass]="{ completed: todo.completed }">{{
+      todo.name
+    }}</span>
+    <span class="expand" (click)="expanded = !expanded">
+      <img [ngClass]="{ up: expanded }" src="/assets/down.png" alt="expand" />
+    </span>
+  </div>
+  <div class="center" *ngIf="expanded">
+    <span class="desc">
+      {{ todo.description }}
+    </span>
+    <div class="options">
+      <span (click)="updateIntent = true" class="option"
+        ><img src="/assets/edit.png" alt="edit" />
+        <div (click)="$event.stopPropagation()">
+          <div class="actionIntent" *ngIf="updateIntent">
+            <span>Update this todo?</span>
+            <div class="intentOptions">
+              <button class="cancel" (click)="updateIntent = false">No</button>
+              <button (click)="handleEdit()">Yes</button>
+            </div>
+          </div>
+        </div>
+      </span>
+      <span (click)="deleteIntent = true" class="option"
+        ><img src="/assets/delete.png" alt="delete" />
+        <div (click)="$event.stopPropagation()">
+          <div class="actionIntent" *ngIf="deleteIntent">
+            <span>Delete this todo?</span>
+            <div class="intentOptions">
+              <button class="cancel" (click)="deleteIntent = false">No</button>
+              <button (click)="handleDelete()">Yes</button>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+  <div class="bottom">
+    <span class="status">
+      <img
+        [src]="
+          todo.completed
+            ? '/assets/sidebar/completed.png'
+            : '/assets/sidebar/pending.png'
+        "
+        alt="status"
+      />
+      {{ todo.completed ? "Completed" : "Pending" }}
+    </span>
+    <span class="date"> {{ todo.updatedAt | date: "short" }} </span>
+  </div>
+</div>

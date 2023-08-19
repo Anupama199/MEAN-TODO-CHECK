@@ -1,0 +1,26 @@
+<div class="login">
+  <form [formGroup]="signinForm" (ngSubmit)="handleSubmit()">
+    <h2>Sign in</h2>
+    <app-form-input
+      [control]="email"
+      type="email"
+      placeholder="Email"
+    ></app-form-input>
+    <app-form-input
+      [control]="password"
+      type="password"
+      placeholder="Password"
+    ></app-form-input>
+    <div class="bottom">
+      <div class="options">
+        <button class="cancel" type="button" (click)="signinForm.reset()">
+          Cancel
+        </button>
+        <button [disabled]="loading || !signinForm.valid">Submit</button>
+      </div>
+      <div class="demo">
+        <button (click)="handleDemo()" [disabled]="loading">Demo</button>
+      </div>
+    </div>
+  </form>
+</div>
